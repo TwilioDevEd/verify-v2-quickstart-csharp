@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VerifyV2Quickstart", "VerifyV2Quickstart\VerifyV2Quickstart.csproj", "{03387E96-F003-4E57-9787-0E087CE93904}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03387E96-F003-4E57-9787-0E087CE93904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03387E96-F003-4E57-9787-0E087CE93904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03387E96-F003-4E57-9787-0E087CE93904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03387E96-F003-4E57-9787-0E087CE93904}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
