@@ -27,10 +27,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Domain" />
-    </ItemGroup>
-
-    <ItemGroup>
       <_ResolveComReferenceCache Remove="obj\Debug\netcoreapp2.1\VerifyV2Quickstart.csproj.ResolveComReference.cache" />
     </ItemGroup>
 

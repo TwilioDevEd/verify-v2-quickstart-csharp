@@ -14,12 +14,12 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IVerification _verification;
-        private readonly ILogger _logger;
+        private readonly ILogger<VerifyModel> _logger;
         
         public VerifyModel(
             UserManager<ApplicationUser> userManager,
             IVerification verification,
-            ILogger<RegisterModel> logger)
+            ILogger<VerifyModel> logger)
         {
             _userManager = userManager;
             _verification = verification;
@@ -40,7 +40,7 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
         
         public ActionResult OnGet(string returnUrl = null)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("_UserId")))
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("_UserId")) && HttpContext.User == null)
             {
                 return LocalRedirect(Url.Content($"~/Identity/Account/Login/?returnUrl={returnUrl}"));
             }

@@ -28,12 +28,12 @@ namespace VerifyV2Quickstart.Services
         {
             try
             {
-                var verificationCheckResource = await VerificationResource.CreateAsync(
+                var verificationResource = await VerificationResource.CreateAsync(
                     to: phoneNumber,
                     channel: channel,
                     pathServiceSid: _config.VerificationSid
                 );
-                return new VerificationResult(verificationCheckResource.Sid);
+                return new VerificationResult(verificationResource.Sid);
             }
             catch (TwilioException e)
             {
