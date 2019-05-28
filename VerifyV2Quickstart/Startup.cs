@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VerifyV2Quickstart.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using VerifyV2Quickstart.Models;
+using VerifyV2Quickstart.Filters;
 using VerifyV2Quickstart.Services;
 
 namespace VerifyV2Quickstart
@@ -41,6 +36,7 @@ namespace VerifyV2Quickstart
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IVerification, Verification>();
+            services.AddScoped<VerifyFilter>();
 
             services.AddDistributedMemoryCache();
 
@@ -79,12 +75,7 @@ namespace VerifyV2Quickstart
 
             app.UseSession();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvcWithDefaultRoute();
         }
     }
 }

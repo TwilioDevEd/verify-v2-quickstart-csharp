@@ -38,63 +38,12 @@ namespace VerifyV2Quickstart.Tests.PageModels
         }
 
         [Fact]
-        public void OnGetIfUserIdNotInSessionAndNotLoggedInRedirectToLogin()
+        public void OnGetReturnUrlIsAssignedAndPageReturned()
         {
             // Arrange
             var verifyModel = new VerifyModel(GetUserManager(), _verificationService.Object, _logger.Object);
             var context = new Mock<HttpContext>();
-            var session = new Mock<ISession>();
             var value = (byte[]) null;
-            session.Setup(x => x.TryGetValue(It.IsAny<string>(), out value)).Returns(false);
-            context.Setup(x => x.Session).Returns(session.Object);
-            context.Setup(x => x.User).Returns((ClaimsPrincipal) null);
-            verifyModel.PageContext.HttpContext = context.Object;
-
-            var urlHelper = new Mock<IUrlHelper>();
-            urlHelper.Setup(x => x.Content(It.IsAny<string>())).Returns("redirect");
-            verifyModel.Url = urlHelper.Object;
-
-            // Act
-            var result = verifyModel.OnGet("return");
-
-            // Assert
-            Assert.IsType<LocalRedirectResult>(result);
-            session.Verify(x => x.TryGetValue("_UserId", out value), Times.Once);
-            Assert.Equal("redirect", (result as LocalRedirectResult)?.Url);
-            urlHelper.Verify(x => x.Content("~/Identity/Account/Login/?returnUrl=return"), Times.Once);
-        }
-
-        [Fact]
-        public void OnGetIfUserIdInSessionReturnUrlIsAssigned()
-        {
-            // Arrange
-            var verifyModel = new VerifyModel(GetUserManager(), _verificationService.Object, _logger.Object);
-            var context = new Mock<HttpContext>();
-            var session = new Mock<ISession>();
-            var value = Encoding.UTF8.GetBytes("id");
-            session.Setup(x => x.TryGetValue(It.IsAny<string>(), out value)).Returns(true);
-            context.Setup(x => x.Session).Returns(session.Object);
-            verifyModel.PageContext.HttpContext = context.Object;
-
-            // Act
-            var result = verifyModel.OnGet("returnUrl");
-
-            // Assert
-            Assert.Equal("returnUrl", verifyModel.ReturnUrl);
-            Assert.IsType<PageResult>(result);
-            session.Verify(x => x.TryGetValue("_UserId", out value), Times.Once);
-        }
-
-        [Fact]
-        public void OnGetIfNotUserIdInSessionAndUserLoggedInReturnUrlIsAssigned()
-        {
-            // Arrange
-            var verifyModel = new VerifyModel(GetUserManager(), _verificationService.Object, _logger.Object);
-            var context = new Mock<HttpContext>();
-            var session = new Mock<ISession>();
-            var value = (byte[]) null;
-            session.Setup(x => x.TryGetValue(It.IsAny<string>(), out value)).Returns(false);
-            context.Setup(x => x.Session).Returns(session.Object);
             context.Setup(x => x.User).Returns(new Mock<ClaimsPrincipal>().Object);
             verifyModel.PageContext.HttpContext = context.Object;
 
@@ -104,11 +53,10 @@ namespace VerifyV2Quickstart.Tests.PageModels
             // Assert
             Assert.Equal("returnUrl", verifyModel.ReturnUrl);
             Assert.IsType<PageResult>(result);
-            session.Verify(x => x.TryGetValue("_UserId", out value), Times.Once);
         }
 
         [Fact]
-        public async Task OnPostWithoutUserIdAndNotLoggedInThenRedirectToLogin()
+        public async Task OnPosWithoutLoggedInUserThenRedirectToLogin()
         {
             // Arrange
             _userStore.Setup(
@@ -117,10 +65,6 @@ namespace VerifyV2Quickstart.Tests.PageModels
 
             var verifyModel = new VerifyModel(GetUserManager(), _verificationService.Object, _logger.Object);
             var context = new Mock<HttpContext>();
-            var session = new Mock<ISession>();
-            var value = (byte[]) null;
-            session.Setup(x => x.TryGetValue(It.IsAny<string>(), out value)).Returns(false);
-            context.Setup(x => x.Session).Returns(session.Object);
             context.Setup(x => x.User).Returns(new Mock<ClaimsPrincipal>().Object);
             verifyModel.PageContext.HttpContext = context.Object;
 

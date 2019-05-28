@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,6 +10,7 @@ using VerifyV2Quickstart.Services;
 
 namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
 {
+    [Authorize]
     public class VerifyModel: PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -40,27 +41,13 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
         
         public ActionResult OnGet(string returnUrl = null)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("_UserId")) && HttpContext.User == null)
-            {
-                return LocalRedirect(Url.Content($"~/Identity/Account/Login/?returnUrl={returnUrl}"));
-            }
             ReturnUrl = returnUrl;
             return Page();
         }
 
         public async Task<ActionResult> OnPostAsync(string returnUrl = null)
         {
-            ApplicationUser user;
-
-            var userId = HttpContext.Session.GetString("_UserId");
-            if (string.IsNullOrEmpty(userId))
-            {
-                user = await _userManager.GetUserAsync(HttpContext.User);
-            }
-            else
-            {
-                user = await _userManager.FindByIdAsync(userId);
-            }
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
 
             if (user == null)
             {

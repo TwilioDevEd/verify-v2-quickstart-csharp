@@ -50,7 +50,7 @@ namespace VerifyV2Quickstart.Services
                     code: code,
                     pathServiceSid: _config.VerificationSid
                 );
-                return verificationCheckResource.Valid == true ?
+                return verificationCheckResource.Status.Equals("approved") ?
                     new VerificationResult(verificationCheckResource.Sid) :
                     new VerificationResult(new List<string>{"Wrong code. Try again."});
             }
