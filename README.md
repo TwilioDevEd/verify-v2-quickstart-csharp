@@ -7,7 +7,7 @@ This application example demonstrates how to do Simple phone verification with C
 
 ## Local Development
 
-1. First clone this repository and `cd`into it.
+1. First clone this repository and `cd` into it.
 
    ```bash
    $ git clone git@github.com:TwilioDevEd/verify-v2-quickstart-csharp.git
@@ -41,7 +41,7 @@ That's it!
 
     `cd verify-v2-quickstart-csharp/VerifyV2Quickstart.Tests`
     
-2. Run tests
+1. Run tests
 
     `dotnet test`
 
