@@ -4,6 +4,7 @@
 
 This application example demonstrates how to do Simple phone verification with C# ASP.NET Core MVC, and Twilio Verify.
 
+[![build status](https://ci.appveyor.com/api/projects/status/5b8cmuf5598em9t1/branch/master?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/automated-survey-csharp)
 
 ## Local Development
 
