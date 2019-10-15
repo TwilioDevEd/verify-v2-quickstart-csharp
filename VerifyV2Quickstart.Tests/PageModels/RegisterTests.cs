@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Moq;
 using VerifyV2Quickstart.Areas.Identity.Pages.Account;
 using VerifyV2Quickstart.Models;
@@ -17,6 +18,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
     public class RegisterTests
     {
         private readonly Mock<IVerification> _verificationService;
+        private readonly Mock<FakeSignInManager> _signInManage;
         private readonly Mock<IUserStore<ApplicationUser>> _userStore;
         private readonly Mock<ILogger<RegisterModel>> _logger;
 
@@ -25,6 +27,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
             _userStore = new Mock<IUserStore<ApplicationUser>>();
             _verificationService = new Mock<IVerification>();
             _logger = new Mock<ILogger<RegisterModel>>();
+            _signInManage = new Mock<FakeSignInManager>();
         }
 
         private UserManager<ApplicationUser> GetUserManager()
@@ -40,7 +43,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
         public void OnGetReturnUrlIsAssigned()
         {
             // Arrange
-            var registerModel = new RegisterModel(GetUserManager(), _verificationService.Object, _logger.Object);
+            var registerModel = new RegisterModel(GetUserManager(), _signInManage.Object, _verificationService.Object, _logger.Object);
 
             // Act
             registerModel.OnGet("returnUrl");
@@ -52,7 +55,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
         [Fact]
         public async Task OnPostWithInvalidModelStateThenReturnsPage()
         {
-            var registerModel = new RegisterModel(GetUserManager(), _verificationService.Object, _logger.Object);
+            var registerModel = new RegisterModel(GetUserManager(),_signInManage.Object,  _verificationService.Object, _logger.Object);
 
             // Arrange
             registerModel.ModelState.AddModelError("key", "Another error");
@@ -74,7 +77,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
                 IdentityResult.Failed(new IdentityError {Code = "1", Description = "Error"})
             );
 
-            var registerModel = new RegisterModel(GetUserManager(), _verificationService.Object, _logger.Object);
+            var registerModel = new RegisterModel(GetUserManager(), _signInManage.Object, _verificationService.Object, _logger.Object);
 
             registerModel.Input = new RegisterModel.InputModel
             {
@@ -101,7 +104,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
                 x => x.StartVerificationAsync(It.IsAny<string>(), It.IsAny<string>())
             ).ReturnsAsync(new VerificationResult(new List<string> {"Error"}));
 
-            var registerModel = new RegisterModel(GetUserManager(), _verificationService.Object, _logger.Object);
+            var registerModel = new RegisterModel(GetUserManager(), _signInManage.Object, _verificationService.Object, _logger.Object);
 
             registerModel.Input = new RegisterModel.InputModel
             {
@@ -129,7 +132,7 @@ namespace VerifyV2Quickstart.Tests.PageModels
                 x => x.StartVerificationAsync(It.IsAny<string>(), It.IsAny<string>())
             ).ReturnsAsync(new VerificationResult("SID"));
 
-            var registerModel = new RegisterModel(GetUserManager(), _verificationService.Object, _logger.Object);
+            var registerModel = new RegisterModel(GetUserManager(), _signInManage.Object, _verificationService.Object, _logger.Object);
 
             registerModel.Input = new RegisterModel.InputModel
             {

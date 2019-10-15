@@ -17,14 +17,17 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
     {
         private readonly IVerification _verificationService;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<RegisterModel> _logger;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
             IVerification verificationService,
                 ILogger<RegisterModel> logger)
         {
             _verificationService = verificationService;
+            _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
         }
@@ -49,8 +52,7 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
             public string FullPhoneNumber { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
-                MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
@@ -82,7 +84,7 @@ namespace VerifyV2Quickstart.Areas.Identity.Pages.Account
                     if (verification.IsValid)
                     {
                         HttpContext.Session.SetString("_UserId", user.Id);
-
+                        await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, false, lockoutOnFailure: true);
                         return LocalRedirect(Url.Content($"~/Identity/Account/Verify/?returnUrl={returnUrl}"));
                     }
 

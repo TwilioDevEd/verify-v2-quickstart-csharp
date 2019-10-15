@@ -43,7 +43,6 @@ namespace VerifyV2Quickstart.Tests.PageModels
             // Arrange
             var verifyModel = new VerifyModel(GetUserManager(), _verificationService.Object, _logger.Object);
             var context = new Mock<HttpContext>();
-            var value = (byte[]) null;
             context.Setup(x => x.User).Returns(new Mock<ClaimsPrincipal>().Object);
             verifyModel.PageContext.HttpContext = context.Object;
 
