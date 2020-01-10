@@ -6,6 +6,8 @@ This application example demonstrates how to do Simple phone verification with C
 
 [![build status](https://ci.appveyor.com/api/projects/status/5b8cmuf5598em9t1/branch/master?svg=true)](https://ci.appveyor.com/project/TwilioDevEd/automated-survey-csharp)
 
+> We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
+
 ## Local Development
 
 1. First clone this repository and `cd` into it.
