@@ -16,7 +16,7 @@ namespace VerifyV2Quickstart.Tests
             new Mock<IUserClaimsPrincipalFactory<ApplicationUser>>().Object,
             new Mock<IOptions<IdentityOptions>>().Object,
             new Mock<ILogger<SignInManager<ApplicationUser>>>().Object,
-            null)
+            null, null)
         {
         }
     }

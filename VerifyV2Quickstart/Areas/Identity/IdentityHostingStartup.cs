@@ -18,10 +18,9 @@ namespace VerifyV2Quickstart.Areas.Identity
 
                 services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, AppClaimsPrincipalFactory>();
 
-                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                     .AddRazorPagesOptions(options =>
                     {
-                        options.AllowAreas = true;
                         options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                         options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
                     });
