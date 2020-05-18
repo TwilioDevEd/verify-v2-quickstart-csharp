@@ -1,53 +1,119 @@
-<a href="https://www.twilio.com">
-  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+<a  href="https://www.twilio.com">
+<img  src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg"  alt="Twilio"  width="250"  />
 </a>
 
-This application example demonstrates how to do Simple phone verification with C# ASP.NET Core MVC, and Twilio Verify.
-
-> We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
+# Twilio Verify Quickstart with .NET core
 
 ![](https://github.com/TwilioDevEd/verify-v2-quickstart-csharp/workflows/dotNETCore/badge.svg)
 
-## Local Development
+> We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
 
-1. First clone this repository and `cd` into it.
+## About
 
-   ```bash
-   git clone git@github.com:TwilioDevEd/verify-v2-quickstart-csharp.git
-   cd verify-v2-quickstart-csharp/VerifyV2Quickstart/
-   ```
+This application example demonstrates how to do Simple phone verification with C# ASP.NET Core MVC, and Twilio Verify.
 
-1. Update the file `twilio.json` with your Account SID, Auth Token and Verification SID. For the `VerificationSid` variable you'll need to provision a [Verification Service](https://www.twilio.com/console/verify/services) 
+Implementations in other languages:
 
-1. Install [EF Core CLI](https://docs.microsoft.com/en-gb/ef/core/what-is-new/ef-core-3.0/breaking-changes#the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk) if it's not already installed.
+| Python | Java | Ruby | PHP | Node |
+| :--- | :--- | :----- | :-- | :--- |
+| [Done](https://github.com/TwilioDevEd/verify-v2-quickstart-python) | [Done](https://github.com/TwilioDevEd/verify-v2-quickstart-java)  | [Done](https://github.com/TwilioDevEd/verify-v2-quickstart-rails)    | [Done](https://github.com/TwilioDevEd/verify-v2-quickstart-php) | [Done](https://github.com/TwilioDevEd/verify-v2-quickstart-node)  |
 
-    ```
-    dotnet tool install --global dotnet-ef --version 3.1.1
-    ```
+<!--
+### How it works
 
-1. Build the solution `dotnet build`.
+**TODO: Describe how it works**
+-->
 
-1. Run `dotnet ef database update` to create the local DB.
+## Set up
 
-1. Run the application `dotnet run`.
+### Requirements
 
-1. Check it out at [http://localhost:5000](http://localhost:5000)
+- [dotnet](https://dotnet.microsoft.com/)
+- A Twilio account - [sign up](https://www.twilio.com/try-twilio)
+
+### Twilio Account Settings
+
+This application should give you a ready-made starting point for writing your
+own application. Before we begin, we need to collect
+all the config values we need to run the application:
+
+| Config&nbsp;Value | Description                                                                                                                                                  |
+| :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account&nbsp;Sid  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).                                                         |
+| Auth&nbsp;Token   | Used to authenticate - [just like the above, you'll find this here](https://www.twilio.com/console).                                                         |
+| Verification&nbsp;Sid |  For Verification Service SID. You can generate one [here](https://www.twilio.com/console/verify/services) |
+
+### Local development
+
+After the above requirements have been met:
+
+1. Clone this repository and `cd` into it
+
+```bash
+git clone git@github.com:TwilioDevEd/verify-v2-quickstart-csharp.git
+cd verify-v2-quickstart-csharp/VerifyV2Quickstart/
+```
+
+2. Build to install the dependencies
+
+```bash
+dotnet build
+```
+
+3. Set your environment variables
+
+```bash
+cp VerifyV2Quickstart/twilio.json.example VerifyV2Quickstart/twilio.json
+```
+
+See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
+
+4. Install [EF Core CLI](https://docs.microsoft.com/en-gb/ef/core/what-is-new/ef-core-3.0/breaking-changes#the-ef-core-command-line-tool-dotnet-ef-is-no-longer-part-of-the-net-core-sdk) if it's not already installed.
+
+```
+dotnet tool install --global dotnet-ef --version 3.0.0
+```
+
+5. Create the local DB. This also should be executed in `VerifyV2Quickstart` directory.
+
+```
+dotnet ef database update
+```
+
+6. Run the application
+
+```bash
+dotnet run
+```
+
+7. Navigate to [http://localhost:5000](http://localhost:5000)
 
 That's it!
 
-### Run unit tests
+### Tests
 
-1. cd into VerifyV2Quickstart.Tests project
+You can run the tests locally by typing:
 
-    `cd verify-v2-quickstart-csharp/VerifyV2Quickstart.Tests`
-    
-1. Run tests
+```bash
+dotnet test
+```
 
-    `dotnet test`
+## Resources
 
-## Meta
+- The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
 
-* No warranty expressed or implied. Software is as is. Diggity.
-* The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
-* [MIT License](http://www.opensource.org/licenses/mit-license.html)
-* Lovingly crafted by Twilio Developer Education.
+## Contributing
+
+This template is open source and welcomes contributions. All contributions are subject to our [Code of Conduct](https://github.com/twilio-labs/.github/blob/master/CODE_OF_CONDUCT.md).
+
+[Visit the project on GitHub](https://github.com/twilio-labs/sample-template-dotnet)
+
+## License
+
+[MIT](http://www.opensource.org/licenses/mit-license.html)
+
+## Disclaimer
+
+No warranty expressed or implied. Software is as is.
+
+[twilio]: https://www.twilio.com
